@@ -43,12 +43,15 @@ export default {
         exclude: /(node_modules|bower_components)/,
         loader: 'url-loader?limit=10000'
       },
-  {  test: /\.(jpg|png|gif|svg)$/,
+      {  test: /\.(jpg|png|gif|svg)$/i,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'file-loader?name=/public/images/[name].[ext]'
+    },
+
+{
+  test: /\.html$/,
   exclude: /(node_modules|bower_components)/,
-  loader: 'file-loader',
-  options: {
-    name: '[images][name].[ext]',
-  },
+  loader: 'raw-loader'
 }
     ]
   }

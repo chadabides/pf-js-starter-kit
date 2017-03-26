@@ -1,6 +1,6 @@
 {
   "name": "pf-js-starter-kit",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "JavaScript development environment starter Kit for Coder Camps. I got the build scripts from Cory House the build scripts can be replaced with Gulp or grunt task. See Js-Starter-Kit-Gulp",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
@@ -66,6 +66,7 @@
     "nsp": "2.6.2",
     "numeral": "1.5.3",
     "open": "0.0.5",
+    "raw-loader": "^0.5.1",
     "rimraf": "2.5.4",
     "style-loader": "^0.13.1",
     "surge": "0.18.0",

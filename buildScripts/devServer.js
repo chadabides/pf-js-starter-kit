@@ -15,6 +15,7 @@ import bodyParser from 'body-parser';
 
 //Import Web Pack Here
 import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware'
 import config from '../webpack.config.dev';
 
 
@@ -31,7 +32,7 @@ app.use('/images', express.static('src/client/public/images'));
 //Get complier
 const compiler = webpack(config);
 //pass complier to
-app.use(require('webpack-dev-middleware')(compiler, {
+app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));

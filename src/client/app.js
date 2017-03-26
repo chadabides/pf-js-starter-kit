@@ -3,4 +3,4 @@
 /* This module will load the Config and build page routes*/
 
 import './public/styles/styles.less';
-import './public/images/logo.jpg'
+//import './public/images/logo.jpg'

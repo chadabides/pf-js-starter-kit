@@ -15,7 +15,7 @@ import movieService from '../server/api/movieAPI';
 let movies = movieService.getMovieList();
 for(let movie of movies )
 {
-console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
+    console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
 }
 //Load Index view module with sample data
  let vm = {title:'Movies',author:'Chad Martin'};

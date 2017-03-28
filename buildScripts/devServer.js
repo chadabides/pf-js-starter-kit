@@ -22,6 +22,32 @@ import config from '../webpack.config.dev';
 
 const port = 3000;
 const app = express();
+//Add Example Code Here for L5
+
+//res Example
+app.get('/product', (req, res) => {
+  let productId = req.query['id'];
+  if (!productId) {
+    res.status(404).send('You did not enter a product id!').end();
+  } else {
+    res.send(`Showing details for product ${productId}`).end();
+  }
+});
+
+//shout back
+app.get('/shout', (req, res) => {
+  let message = req.query['message'];
+  res.send(`You said "${message}!"`);
+});
+//say Hello
+app.get('/hello', (req, res) => {
+  res.send('Hello Node!');
+});
+
+
+
+
+
 //Set Up app folders
 app.use('/bower_components',express.static('bower_components'));
 app.use('/app', express.static('src/client/app'));

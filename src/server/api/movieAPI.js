@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
-/** @todo: add Server Side Movie Services goes here
+/**
 *   This class will be where the you put Client side services
 */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 export default class MovieService
 {
 static getMovieList ()
@@ -28,7 +29,7 @@ static getMovieList ()
   },
   {
       id: 1017106,
-      title: 'IRObot',
+      title: 'I-Robot',
       genre: 'Sy-FY',
 
   },
@@ -40,3 +41,18 @@ static getMovieList ()
     ]
 }
 }
+//Test Import remove when done
+export function doSomething() {
+  console.log('did something!');
+}
+
+function doSomethingSecret() {
+  console.log('secret!');
+}
+
+export function doSomethingElse(admin) {
+    console.log('something else!');
+    if (admin) doSomethingSecret()
+}
+
+export const orange = '#FFA500';

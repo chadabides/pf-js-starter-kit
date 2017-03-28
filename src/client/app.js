@@ -4,14 +4,18 @@
 
 
 //import in styles
-//import '../'
 import './public/styles/styles.less';
+
 //import in images
 import './public/images/film.png';
 import './public/images/robot-waving.gif';
 //Gets a list of movies and the does stuff functions
 import {default as movieService , doSomething, doSomethingElse as doit}  from '../server/api/movieAPI';
-//import * as movieService  from '../server/api/movieAPI';
+import moment from 'moment';
+
+let age = moment("19120414", "YYYYMMDD").fromNow();
+console.log('The RMS Titanic sank ' + age);
+
 // Use Service to get movies
 
 let movies = movieService.getMovieList();

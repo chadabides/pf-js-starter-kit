@@ -41,18 +41,3 @@ static getMovieList ()
     ]
 }
 }
-//Test Import remove when done
-export function doSomething() {
-  console.log('did something!');
-}
-
-function doSomethingSecret() {
-  console.log('secret!');
-}
-
-export function doSomethingElse(admin) {
-    console.log('something else!');
-    if (admin) doSomethingSecret()
-}
-
-export const orange = '#FFA500';

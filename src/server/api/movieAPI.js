@@ -3,41 +3,19 @@
 */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+//import our Model Here
+import Movie from '../models/movie';
 export default class MovieService
 {
 static getMovieList ()
 {
   return [
-    {  id: 1017109,
-      title: 'Juno',
-      genre: 'Drama',
-  },
-  {
-      id: 1017105,
-      title: 'Star Wars',
-      genre: 'Sy-Fy',
-  },
-  {
-      id: 1017108,
-      title: 'Big',
-      genre: 'Sy-FY',
-  },
-  {
-      id: 1017104,
-      title: 'Juno',
-      genre: 'Drama',
-  },
-  {
-      id: 1017106,
-      title: 'I-Robot',
-      genre: 'Sy-FY',
-
-  },
-  {
-      id: 4444441,
-      title: 'Logan',
-      genre: 'Sy-Fy',
-  }
+       new Movie(1017109,'The Green Mile','Drama') ,
+       new Movie(1017105,'Star Wars','Sy-Fy'),
+       new Movie(1017108,'Big','Sy-FY'),
+       new Movie(1017104,'Juno','Drama'),
+       new Movie(1017106,'I-Robot','Sy-FY'),
+       new Movie(4444441,'Logan','Sy-Fy')
     ]
 }
 }

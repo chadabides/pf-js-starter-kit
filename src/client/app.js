@@ -19,7 +19,23 @@ for(let movie of movies )
 {
     console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
 }
+console.log(`Filter List:  `);
+let filtered = movieService.filterList();
+for(let movie of filtered )
+{
+    console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
+}
 
+let reuslt = movieService.deleteMovie(1017104);
+if(reuslt)
+{
+  console.log(`Check First List for deleted Lego Movie:  `);
+  movies = movieService.getMovieList();
+  for(let movie of movies )
+  {
+      console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
+  }
+}
 //Load Index view module with sample data
  let vm = {title:'Movies',author:'Chad Martin'};
 

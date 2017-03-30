@@ -1,11 +1,13 @@
 /**
 * Movie.js this is our model for a movie
 */
+import moment from 'moment';
 //here we define the private property keys
 let s_id = Symbol('id');
 let s_title = Symbol('title');
 let s_genre = Symbol('genre');
 let s_thumbnail = Symbol();
+
 export default class Movie
 {
   //Getters for Properties
@@ -22,4 +24,62 @@ export default class Movie
 
   }
 
+
+}
+
+
+/** this var is so that we have a Singleton Collection class */
+let instance = null;
+/** MovieCollection Class */
+export class MovieCollection{
+   get length(){
+     return this.movies.length;
+   }
+   get list(){
+     return this.movies
+   }
+   get created(){
+     return this.movies.timeStamp;
+
+   }
+    constructor(){
+    if(!instance){
+             instance = this;
+             this.movies = [];
+
+       }
+
+       // to test whether we have singleton or not
+       this.timeStamp = moment().format('YYYY-MM-DD h:mm:ss a');
+       //@todo: change this to a log statment;
+       console.log(`A movie collection was created at ${this.timeStamp}`);
+       return instance;
+
+  }
+  add (movie= new Movie())
+  {
+   this.movies[this.length] = movie;
+   //@todo: change this to a log statment;
+   console.log(`movie: ${movie.title} was created at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+  }
+  delete (id=-1)
+  {
+    let index = this.movies.findIndex((movie)=>{return movie.id === id; });
+    if(!index)
+    {
+      throw new Error('You must enter a vaild id')
+     }
+     else{
+       //@todo: change this to a log statment;
+       console.log(`movie: ${this.movies[index].title} was deleted at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+       this.movies.splice(index, 1);
+     }
+
+  }
+  filter (filter = (movie)=>{return movie.genre === 'SyFy'; })
+  {
+   //@todo: change this to a log statment;
+   console.log(`movie filter ran at ${moment().format('LLLL')}`);
+   return this.movies.filter(filter);
+  }
 }

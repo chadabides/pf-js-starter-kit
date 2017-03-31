@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /** Namespace for Movie App
 /* Here is where you build the MovieApp module */
-
+//this allows use to watch for changes to the model and update the view
 import MovieController from './controllers/movieController'
 //import views here
 //import hometemplate from "./views/movies.html";
@@ -21,12 +21,12 @@ static start(baseElement, movieModel)
 
 }
 static buildMovieHomeView(baseElement, movieModel, movieController){
-        let movieElement = document.createElement( "div" );
+let movieElement = document.createElement( "div" );
 let render = ()=>{
   // Instead of loadmovies We should use templating library
   //  which generates the HTML for our movie entry
   // I just used a function to be simple for this example
-  movieElement.innerHTML = this.loadmovies(movieModel,movieController)
+  movieElement.innerHTML = this.loadmovies(movieModel.list,movieController)
   baseElement.appendChild(movieElement);
 }
 

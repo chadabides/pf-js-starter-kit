@@ -2,6 +2,7 @@
 * Movie.js this is our model for a movie
 */
 import moment from 'moment';
+import {default as observable, observe}  from '../core/observer.js';
 //here we define the private property keys
 let s_id = Symbol('id');
 let s_title = Symbol('title');
@@ -60,7 +61,7 @@ export class MovieCollection {
   {
    this.movies[this.length] = movie;
    //@todo: change this to a log statment;
-   console.log(`movie: ${movie.title} was created at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+   console.log(`movie: ${movie.title} was update at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
   }
   delete (id=-1)
   {
@@ -82,7 +83,22 @@ export class MovieCollection {
    console.log(`movie filter ran at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
    return this.movies.filter(filter);
   }
-
+  //this allows you to watch all items in a collection and if something changes
+  // We will call the callback function you can also only watch one item in the list
+  //@todo finish this
+  itemsObservable(callback,index=-1){
+    if(index === -1)
+    {
+    for(let m of this.movies){
+  //  let o = observable(m);
+  //  observe(callback);
+    }
+    }
+    else {
+      //observable(this.movies[index]);
+      //observe(callback);
+    }
+  }
 
 
 

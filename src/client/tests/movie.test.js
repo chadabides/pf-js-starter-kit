@@ -13,7 +13,7 @@ describe('Our first test', () => {
 });
 describe('MovieServie getMovieList Test', () => {
   it('should pass', () => {
-    expect(movieService.getMovieList().length).to.equal(7);
+    expect(movieService.getMovieCollection().list.length).to.equal(7);
   });
 });
 describe('MovieServie addMovie Test', () => {
@@ -24,7 +24,7 @@ describe('MovieServie addMovie Test', () => {
 });
 describe('MovieServie getMovieList Test after addMovie', () => {
   it('should pass', () => {
-    expect(movieService.getMovieList().length).to.equal(8);
+    expect(movieService.getMovieCollection().list.length).to.equal(8);
   });
 });
 describe('MovieServie deleteMovie Test', () => {
@@ -34,7 +34,7 @@ describe('MovieServie deleteMovie Test', () => {
 });
 describe('MovieServie getMovieList Test after deleteMovie', () => {
   it('should pass', () => {
-    expect(movieService.getMovieList().length).to.equal(7);
+    expect(movieService.getMovieCollection().list.length).to.equal(7);
   });
 });
 

@@ -45,7 +45,7 @@ class EventEmitter {
 }
 
 
-class Observer {
+class EventObserver {
   constructor(id, subject) {
     this.id = id;
     this.subject = subject;

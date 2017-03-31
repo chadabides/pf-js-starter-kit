@@ -7,7 +7,7 @@
 import {default as Movie, MovieCollection as movieCollection} from '../models/movie';
 export default class MovieService
 {
-static getMovieList ()
+static getMovieCollection ()
   {
     let movies =  new movieCollection();
     if(movies.length === 0)
@@ -20,7 +20,7 @@ static getMovieList ()
         movies.add(new Movie(1017106,'I-Robot','SyFY'));
         movies.add(new Movie(4444441,'Logan','SyFy'));}
 
-    return movies.list;
+    return movies;
   }
 static addMovie (movie = new Movie())
 {

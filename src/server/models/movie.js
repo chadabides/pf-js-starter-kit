@@ -31,7 +31,7 @@ export default class Movie
 /** this var is so that we have a Singleton Collection class */
 let instance = null;
 /** MovieCollection Class */
-export class MovieCollection{
+export class MovieCollection {
    get length(){
      return this.movies.length;
    }
@@ -46,13 +46,13 @@ export class MovieCollection{
     if(!instance){
              instance = this;
              this.movies = [];
-
+             // to test whether we have singleton or not
+             this.timeStamp = moment().format('YYYY-MM-DD h:mm:ss a');
+             //@todo: change this to a log statment;
+             console.log(`A movie collection was created at ${this.timeStamp}`);
        }
 
-       // to test whether we have singleton or not
-       this.timeStamp = moment().format('YYYY-MM-DD h:mm:ss a');
-       //@todo: change this to a log statment;
-       console.log(`A movie collection was created at ${this.timeStamp}`);
+
        return instance;
 
   }
@@ -79,7 +79,11 @@ export class MovieCollection{
   filter (filter = (movie)=>{return movie.genre === 'SyFy'; })
   {
    //@todo: change this to a log statment;
-   console.log(`movie filter ran at ${moment().format('LLLL')}`);
+   console.log(`movie filter ran at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
    return this.movies.filter(filter);
   }
+
+
+
+
 }

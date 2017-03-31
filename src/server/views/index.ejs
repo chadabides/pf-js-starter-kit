@@ -15,7 +15,16 @@
     The htmlWebpackPlugin will parse the logic below so that trackJS is only added to the production version of index.html (since only webpack.config.prod.js provides the trackJS token)
     This is an example of how to add features to index.html for only one environment.
     Inject trackJS code here
+
+   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
+
+<script type="text/javascript">window._trackJs = { token: '<%=htmlWebpackPlugin.options.trackJSToken%>' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+
+<% } %>
    -->
+   <!-- BEGIN TRACKJS -->
+   <!-- END TRACKJS -->
   <meta charset="UTF-8">
 </head>
 <!-- This file is where you build the Layout. This file is the main site wrapper
@@ -39,7 +48,7 @@
   </header>
   <div class='row'>
     <div><img src="images/robot-waving.gif" /></div>
-    <module src='movieApp'>
+    <module id='movieApp'>
   <!-- Inject or load Modules Here --->
     </module>
   </div>

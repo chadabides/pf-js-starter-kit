@@ -9,36 +9,16 @@ import './public/styles/styles.less';
 //import in images
 import './public/images/film.png';
 import './public/images/robot-waving.gif';
+import movieApp from './app/movieApp.js';
 //Gets a list of movies and the does stuff functions
 import  {default as movieService}  from '../server/api/movieAPI';
-//import * as movieService  from '../server/api/movieAPI';
-// Use Service to get movies
+import MovieController from './app/controllers/movieController'
 
-let movies = movieService.getMovieList();
-for(let movie of movies )
-{
-    console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
-}
-console.log(`Filter List:  `);
-let filtered = movieService.filterList();
-for(let movie of filtered )
-{
-    console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
-}
-
-let reuslt = movieService.deleteMovie(1017104);
-if(reuslt)
-{
-  console.log(`Check First List for deleted Lego Movie:  `);
-  movies = movieService.getMovieList();
-  for(let movie of movies )
-  {
-      console.log(`Movie Title: ${movie.title} Genre: ${movie.genre} `);
-  }
-}
-//Load Index view module with sample data
- let vm = {title:'Movies',author:'Chad Martin'};
+// Load Index view module with sample data
+ let vm =  new MovieController();
 
  let titleHTMl = document.getElementById("headername");
+ let movieModule = document.getElementById("movieApp");
+ movieApp.start(movieModule,movieService.getMovieList());
 
- titleHTMl.innerHTML = vm.title ;
+ titleHTMl.innerHTML = 'Movies' ;

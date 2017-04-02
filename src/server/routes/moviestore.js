@@ -11,8 +11,7 @@ router.use((req, res, next) => {
 });
 
 //do not define next if you are not going to use it
-router.get('/', function(req, res) {
-  //let content = movieService.get().list;
+router.get('/list', function(req, res) {
   res.send(`displaying list of movies...`);
 });
 
@@ -32,9 +31,6 @@ router.get('/movie/:id', lookupMovie, (req, res) => {
 
 
 function lookupMovie(req, res, next) {
-  // if the user ID is 0, skip to the next router
-  if (req.params.id === '0') next('route')
-
   let movieId = req.params['id'];
   let matches = movieService.filter(m => m.id == movieId);
   if (!matches.length) {

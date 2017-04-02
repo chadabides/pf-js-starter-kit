@@ -12,11 +12,9 @@ import open from 'open';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import moment from 'moment';
-//import jsonfileservice';
-import{default as jsonfileservice} from "../src/server/routes/utils/jsonfileservice";
 //import movies routes
 import moviesRoute from '../src/server/routes/moviestore';
-
+import users from '../src/server/routes/users';
 //Import Web Pack Here
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
@@ -24,7 +22,7 @@ import config from '../webpack.config.dev';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
-const jsfileservice = new jsonfileservice();
+
 const port = 3000;
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -70,21 +68,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 //User Functions
-app.use('/users', function (req, res, next) {
-  console.log('Request URL:', req.originalUrl)
-  next()
-}, (req, res, next)=> {
-  //checkForSecretKey function
-  let secret = req.query['secret'];
-  if (secret !== 'tacos') {
-    res.status(401).send('You are not authorized!');
-  } else {
-    next();
-  }
-},(req, res)=>{
-  var json = jsfileservice.getFile('/../../data/' + 'user.json');
-       res.send(json);
-});
+app.use('/users', users )
 
 
 app.listen(port, function(err) {

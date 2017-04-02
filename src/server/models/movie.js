@@ -2,7 +2,7 @@
 * Movie.js this is our model for a movie
 */
 import moment from 'moment';
-import {default as observable, observe}  from '../core/observer.js';
+//import {default as observable, observe}  from '../core/observer.js';
 //here we define the private property keys
 let s_id = Symbol('id');
 let s_title = Symbol('title');
@@ -89,10 +89,10 @@ export class MovieCollection {
   itemsObservable(callback,index=-1){
     if(index === -1)
     {
-    for(let m of this.movies){
+  //  for(let m of this.movies){
   //  let o = observable(m);
   //  observe(callback);
-    }
+  //  }
     }
     else {
       //observable(this.movies[index]);

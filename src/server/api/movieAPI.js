@@ -7,35 +7,34 @@
 import {default as Movie, MovieCollection as movieCollection} from '../models/movie';
 export default class MovieService
 {
-static getMovieCollection ()
+  constructor(){
+let movies =  new movieCollection();
+if(movies.length === 0)
+{
+  movies.add(new Movie(1017109,'Juno','Drama'));
+  movies.add(new Movie(1017105,'Star Wars','SyFy'));
+  movies.add(new Movie(1017108,'Big','SyFy'));
+  movies.add(new Movie(1017104,'The Lego Movie','Comedy'));
+  movies.add(new Movie(1017119,'The Green Mile','SyFy'));
+  movies.add(new Movie(1017106,'I-Robot','SyFy'));
+  movies.add(new Movie(4444441,'Logan','SyFy'));
+}
+let getMovieCollection = () =>
   {
-    let movies =  new movieCollection();
-    if(movies.length === 0)
-      {
-         movies.add(new Movie(1017109,'Juno','Drama'));
-        movies.add(new Movie(1017105,'Star Wars','SyFy'));
-        movies.add(new Movie(1017108,'Big','SyFY'));
-        movies.add(new Movie(1017104,'The Lego Movie','Comedy'));
-        movies.add(new Movie(1017119,'The Green Mile','SyFy'));
-        movies.add(new Movie(1017106,'I-Robot','SyFY'));
-        movies.add(new Movie(4444441,'Logan','SyFy'));}
 
     return movies;
   }
-static addMovie (movie = new Movie())
+let addMovie = (movie = new Movie())=>
 {
-    let result = false;
-  let movies =  new movieCollection();
+ let result = false;
   movies.add(movie);
   result= true;
   return result;
 }
-static deleteMovie (id = -1)
+let deleteMovie = (id = -1) =>
 {
-
   let result = false;
   try {
-      let movies =  new movieCollection();
        movies.delete(id);
       result = true;
   } catch (e) {
@@ -47,9 +46,19 @@ return result;
 
 }
 
-static filterList (filter = (movie)=>{return movie.genre === 'Drama'; }){
+let filterList = (filter = (movie)=>{return movie.genre === 'Drama'; }) =>
+{
 let movies =  new movieCollection();
 return movies.filter(filter);
 }
 
+let service = {
+    get: getMovieCollection,
+    filter: filterList,
+    add: addMovie,
+    delete: deleteMovie
+};
+//return service
+return service;
+}
 }

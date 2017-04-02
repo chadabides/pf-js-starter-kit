@@ -11,15 +11,15 @@ import './public/images/film.png';
 import './public/images/robot-waving.gif';
 import movieApp from './app/movieApp.js';
 //Gets a list of movies and the does stuff functions
-import  {default as movieService}  from '../server/api/movieAPI';
-import MovieController from './app/controllers/movieController'
+import  {default as MovieService}  from '../server/api/movieAPI';
+//import MovieController from './app/controllers/movieController'
 
 // Load Index view module with sample data
- let vm =  new MovieController();
-
+ //let vm =  new MovieController();
+ let movieService = new MovieService();
  let titleHTMl = document.getElementById("headername");
  let movieModule = document.getElementById("movieApp");
- movieApp.start(movieModule,movieService.getMovieCollection());
+ movieApp.start(movieModule,movieService.get());
 
  titleHTMl.innerHTML = 'Movies' ;
 

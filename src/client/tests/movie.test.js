@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import jsdom from 'jsdom';
 import fs from 'fs';
-import  {default as movieService}  from '../../server/api/movieAPI';
+import  {default as MovieService}  from '../../server/api/movieAPI';
 import {default as Movie} from '../../server/models/movie';
 
-
+let movieService = new MovieService();
 
 describe('Our first test', () => {
   it('should pass', () => {
@@ -13,31 +13,37 @@ describe('Our first test', () => {
 });
 describe('MovieServie getMovieList Test', () => {
   it('should pass', () => {
-    expect(movieService.getMovieCollection().list.length).to.equal(7);
+    expect(movieService.get().list.length).to.equal(7);
   });
 });
 describe('MovieServie addMovie Test', () => {
   it('should pass', () => {
     let addMovie = new Movie(56,'Don Juen','Drama');
-    expect(movieService.addMovie(addMovie)).to.equal(true)
+    expect(movieService.add(addMovie)).to.equal(true)
   });
 });
 describe('MovieServie getMovieList Test after addMovie', () => {
   it('should pass', () => {
-    expect(movieService.getMovieCollection().list.length).to.equal(8);
+    expect(movieService.get().list.length).to.equal(8);
   });
 });
 describe('MovieServie deleteMovie Test', () => {
   it('should pass', () => {
-    expect(movieService.deleteMovie(56)).to.equal(true)
+    expect(movieService.delete(56)).to.equal(true)
   });
 });
 describe('MovieServie getMovieList Test after deleteMovie', () => {
   it('should pass', () => {
-    expect(movieService.getMovieCollection().list.length).to.equal(7);
+    expect(movieService.get().list.length).to.equal(7);
   });
 });
-
+describe('MovieServie filter Test', () => {
+  it('should pass', () => {
+    let fl = movieService.filter((movie)=>{return movie.genre === 'SyFy'; });
+    console.log(`Filtered movies:`)
+    expect(fl.length).to.equal(5);
+  });
+});
   describe('movies template', () => {
   it('should have h1 that says Movies List:', (done) => {
     const index = fs.readFileSync('./src/client/app/views/movies.html', "utf-8");

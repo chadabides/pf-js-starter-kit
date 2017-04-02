@@ -11,16 +11,40 @@ import open from 'open';
 //import other libs
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
-//import bodyParser from 'body-parser';
+import moment from 'moment';
+//import jsonfileservice';
+import{default as jsonfileservice} from "../src/server/routes/utils/jsonfileservice";
+//import movies routes
+import moviesRoute from '../src/server/routes/moviestore';
 
 //Import Web Pack Here
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
-import moment from 'moment';
-import {default as templateService} from '../src/server/api/templateService';
+//stuff for errors
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
+const jsfileservice = new jsonfileservice();
 const port = 3000;
 const app = express();
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+app.use(bodyParser.json())
+app.use(methodOverride())
+
+app.use((req, res, next) => {
+  console.log('Time:', moment().format('YYYY-MM-DD h:mm:ss a'))
+  next()
+
+});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+//mount movie store list
+app.use('/movies', moviesRoute);
+
 // parses request cookies, populating
 // req.cookies and req.signedCookies
 // when the secret is passed, used
@@ -44,20 +68,24 @@ app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
-app.get('/template', function(req, res){
 
-    res.send(templateService.say());
-
+//User Functions
+app.use('/users', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next)=> {
+  //checkForSecretKey function
+  let secret = req.query['secret'];
+  if (secret !== 'tacos') {
+    res.status(401).send('You are not authorized!');
+  } else {
+    next();
+  }
+},(req, res)=>{
+  var json = jsfileservice.getFile('/../../data/' + 'user.json');
+       res.send(json);
 });
-app.post('/template', function(req, res){
 
-
-  res.redirect('back');
-});
-
-app.get('/users', function(req, res) {
-
-});
 
 app.listen(port, function(err) {
   if (err) {

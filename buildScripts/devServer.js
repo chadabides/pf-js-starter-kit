@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(methodOverride())
+//Add logger
+app.use(logger('dev'));
 
 app.use((req, res, next) => {
   console.log('Time:', moment().format('YYYY-MM-DD h:mm:ss a'))
@@ -40,8 +42,6 @@ app.use(function (err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
-//mount movie store list
-app.use('/movies', moviesRoute);
 
 // parses request cookies, populating
 // req.cookies and req.signedCookies
@@ -67,7 +67,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
-//User Functions
+ /** Mount Routes Here */
+//mount movie store list
+app.use('/movies', moviesRoute);
+
+//Users Route
 app.use('/users', users )
 
 

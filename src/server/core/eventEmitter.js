@@ -1,3 +1,6 @@
+import {default as log} from '../../server/core/logger'
+//create logger;
+let logger = new log();
 //helper function
 let isFunction = function(obj) {
     return typeof obj == 'function' || false;
@@ -52,6 +55,6 @@ class EventObserver {
     this.subject.addListener("change", (data) => this.onChange(data));
   }
   onChange(data) {
-    console.log(`${this.id} notified of change:`, data);
+    logger.log(`${this.id} notified of change: ${data}`,'debug');
   }
 }

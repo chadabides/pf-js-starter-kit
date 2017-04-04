@@ -53,7 +53,7 @@ export class MovieCollection {
              // to test whether we have singleton or not
              this.timeStamp = logger.time();
              //@todo: change this to a log statment;
-             console.log(`A movie collection was created at ${this.timeStamp}`);
+             logger.log(`A movie collection was created at ${this.timeStamp}`,'debug');
        }
 
 
@@ -64,7 +64,7 @@ export class MovieCollection {
   {
    this.movies[this.length] = movie;
    //@todo: change this to a log statment;
-   console.log(`movie: ${movie.title} was update at ${logger.time()}`);
+   logger.log(`movie: ${movie.title} was update at ${logger.time()}`,'debug');
   }
   delete (id=-1)
   {
@@ -74,8 +74,8 @@ export class MovieCollection {
       throw new Error('You must enter a vaild id')
      }
      else{
-       //@todo: change this to a log statment;
-       console.log(`movie: ${this.movies[index].title} was deleted at ${logger.time()}`);
+
+       logger.log(`movie: ${this.movies[index].title} was deleted at ${logger.time()}`,'debug');
        this.movies.splice(index, 1);
      }
 
@@ -83,7 +83,7 @@ export class MovieCollection {
   filter (filter = (movie)=>{return movie.genre === 'SyFy'; })
   {
    //@todo: change this to a log statment;
-   console.log(`movie filter ran at ${logger.time()}`);
+   logger.log(`movie filter ran at ${logger.time()}`,'debug');
    return this.movies.filter(filter);
   }
   //this allows you to watch all items in a collection and if something changes

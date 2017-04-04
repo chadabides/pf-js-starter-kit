@@ -5,6 +5,9 @@
 /* eslint-disable no-console */
 //import our Model Here
 import {default as Movie, MovieCollection as movieCollection} from '../models/movie';
+import {default as log} from '../../server/core/logger'
+//create logger;
+let logger = new log();
 export default class MovieService
 {
   constructor(){
@@ -19,6 +22,7 @@ if(movies.length === 0)
   movies.add(new Movie(1017106,'I-Robot','SyFy'));
   movies.add(new Movie(4444441,'Logan','SyFy'));
 }
+logger.log('Created Movies in the Movie Api', 'debug')
 //@todo replace this with ejs template
 let renderMovieList=()=>
 {

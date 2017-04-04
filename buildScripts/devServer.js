@@ -13,7 +13,9 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 //import other libs
 import {default as log} from '../src/server/core/logger'
-
+//Add logger before anyone else can
+let logger = new log('info','error');
+logger.consoleLevel = 'info';
 import moment from 'moment';
 //import movies routes
 import moviesRoute from '../src/server/routes/moviestore';
@@ -32,19 +34,8 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(methodOverride())
-//Add logger
-let logger = new log();
+
 app.use(logger.dev);
-
-app.use((req, res, next) => {
-  console.log('Time:', logger.time())
-  next()
-
-});
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
 
 // parses request cookies, populating
 // req.cookies and req.signedCookies
@@ -58,6 +49,7 @@ app.set('view engine', 'ejs');
 
 //Set Up app folders
 app.use('/bower_components',express.static('bower_components'));
+
 app.use('/app', express.static('src/client/app'));
 app.use('/css', express.static('src/client/public/styles'));
 app.use('/images', express.static('src/client/public/images'));
@@ -76,11 +68,32 @@ app.use('/movies', moviesRoute);
 
 //Users Route
 app.use('/users', users )
+//cause error to occur
+app.use('/test', function (req, res, next) {next('My bad')});
+// dev error handler
+app.use(function (err, req, res, next) {
+  res.status(err['status'] || 500);
+  if (err.message) {
+    logger.log(err.message,'error');
+    res.render('error', {
+    message: err.message,
+    error: err
+  });
+}
+else {
+  logger.log(err,'error');
+  res.render('error', {
+  message: err,
+  error: err
+});
+}
+
+})
 
 
 app.listen(port, function(err) {
   if (err) {
-    console.log(err);
+    logger.log(err,'error');
   } else {
     open('http://localhost:' + port);
   }

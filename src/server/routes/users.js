@@ -1,7 +1,9 @@
 import express from 'express';
 //import jsonfileservice'  This is for servering a user data file for testing;
 import{default as jsonfileservice} from "./utils/jsonfileservice";
-
+import {default as log} from '../../server/core/logger'
+//create logger;
+let logger = new log();
 let router = express.Router();
 
 //User Service
@@ -14,7 +16,7 @@ class UserService
        {
           loadlistfromJsonServer();
        }
-       console.log('Request URL:', req.originalUrl)
+       logger.log(`Request URL: ${req.originalUrl}`, 'debug')
        next()
      }
      //private method
@@ -35,7 +37,7 @@ class UserService
        }
      }
      let userlist = (req, res)=>{
-            console.log(list.length);
+            logger.log(`Users has ${list.length} records`,'info');
             res.send(list);
      };
      // GET count of users.

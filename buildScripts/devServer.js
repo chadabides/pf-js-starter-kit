@@ -8,9 +8,12 @@
 import express from 'express';
 import path from 'path';
 import open from 'open';
-//import other libs
-import logger from 'morgan';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+//import other libs
+import {default as log} from '../src/server/core/logger'
+
 import moment from 'moment';
 //import movies routes
 import moviesRoute from '../src/server/routes/moviestore';
@@ -18,9 +21,8 @@ import users from '../src/server/routes/users';
 //Import Web Pack Here
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
-//stuff for errors
-import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
+
+
 
 
 const port = 3000;
@@ -31,10 +33,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(methodOverride())
 //Add logger
-app.use(logger('dev'));
+let logger = new log();
+app.use(logger.dev);
 
 app.use((req, res, next) => {
-  console.log('Time:', moment().format('YYYY-MM-DD h:mm:ss a'))
+  console.log('Time:', logger.time())
   next()
 
 });

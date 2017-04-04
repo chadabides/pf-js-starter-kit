@@ -1,5 +1,5 @@
 import express from 'express';
-import  {default as MovieService}  from '../api/movieAPI';
+import  {default as MovieService}  from '../api/movieapi';
 
 
 let router = express.Router();
@@ -12,21 +12,17 @@ router.use((req, res, next) => {
 
 //do not define next if you are not going to use it
 router.get('/list', function(req, res) {
-  res.send(`displaying list of movies...`);
+    let hmtl = movieService.renderMovieList();
+  res.send(hmtl);
 });
 
-router.get('/details', function(req, res) {
-  //let m = movieService.get().list[1];
-  res.send(`displaying details for one movie...
-            `);
-});
 router.get('/genre/:id', lookupMovie, (req, res) => {
   let movie = res.locals.movie;
   res.send(`The movie Genre is ${movie.genre}.`);
 });
 router.get('/movie/:id', lookupMovie, (req, res) => {
   let movie = res.locals.movie;
-  res.send(`The product is named ${movie.title}.`);
+  res.send(`<h3> Movie Title: ${movie.title} Genre:${movie.genre}</h3>`);
 });
 
 

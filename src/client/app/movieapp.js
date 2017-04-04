@@ -2,7 +2,7 @@
 /** Namespace for Movie App
 /* Here is where you build the MovieApp module */
 //this allows use to watch for changes to the model and update the view
-import MovieController from './controllers/movieController'
+import MovieController from './controllers/moviecontroller'
 //import views here
 //import hometemplate from "./views/movies.html";
 
@@ -26,7 +26,7 @@ let render = ()=>{
   // Instead of loadmovies We should use templating library
   //  which generates the HTML for our movie entry
   // I just used a function to be simple for this example
-  movieElement.innerHTML = this.loadmovies(movieModel.list,movieController)
+  movieElement.innerHTML = movieModel //this.loadmovies(movieModel.list,movieController)
   baseElement.appendChild(movieElement);
 }
 

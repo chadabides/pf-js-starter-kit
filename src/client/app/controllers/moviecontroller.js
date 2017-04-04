@@ -2,6 +2,7 @@
 /** Movie - BaseController
 *   This class is the movieController
 */
+
 import moment from 'moment';
 
 

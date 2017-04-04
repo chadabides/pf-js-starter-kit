@@ -1,14 +1,16 @@
 /**
 * Movie.js this is our model for a movie
 */
-import moment from 'moment';
+import {default as log} from '../../server/core/logger'
+
 //import {default as observable, observe}  from '../core/observer.js';
 //here we define the private property keys
 let s_id = Symbol('id');
 let s_title = Symbol('title');
 let s_genre = Symbol('genre');
 let s_thumbnail = Symbol();
-
+//create logger;
+let logger = new log();
 export default class Movie
 {
   //Getters for Properties
@@ -44,11 +46,12 @@ export class MovieCollection {
 
    }
     constructor(){
+
     if(!instance){
              instance = this;
              this.movies = [];
              // to test whether we have singleton or not
-             this.timeStamp = moment().format('YYYY-MM-DD h:mm:ss a');
+             this.timeStamp = logger.time();
              //@todo: change this to a log statment;
              console.log(`A movie collection was created at ${this.timeStamp}`);
        }
@@ -61,7 +64,7 @@ export class MovieCollection {
   {
    this.movies[this.length] = movie;
    //@todo: change this to a log statment;
-   console.log(`movie: ${movie.title} was update at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+   console.log(`movie: ${movie.title} was update at ${logger.time()}`);
   }
   delete (id=-1)
   {
@@ -72,7 +75,7 @@ export class MovieCollection {
      }
      else{
        //@todo: change this to a log statment;
-       console.log(`movie: ${this.movies[index].title} was deleted at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+       console.log(`movie: ${this.movies[index].title} was deleted at ${logger.time()}`);
        this.movies.splice(index, 1);
      }
 
@@ -80,7 +83,7 @@ export class MovieCollection {
   filter (filter = (movie)=>{return movie.genre === 'SyFy'; })
   {
    //@todo: change this to a log statment;
-   console.log(`movie filter ran at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
+   console.log(`movie filter ran at ${logger.time()}`);
    return this.movies.filter(filter);
   }
   //this allows you to watch all items in a collection and if something changes

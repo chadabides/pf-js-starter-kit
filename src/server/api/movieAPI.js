@@ -19,6 +19,28 @@ if(movies.length === 0)
   movies.add(new Movie(1017106,'I-Robot','SyFy'));
   movies.add(new Movie(4444441,'Logan','SyFy'));
 }
+//@todo replace this with ejs template
+let renderMovieList=()=>
+{
+  let movies = getMovieCollection().list;
+  let moviesTemplate = '';
+  if (movies) {
+     for(let m of movies)
+     {
+       /**@todo add button to delete a movie <button>Delete Me</button>
+       /* when the button is clicked it will call the Controller */
+       let movieItem = `<li>   Movie Title: ${m.title} Genre:${m.genre} </li>
+       `;
+       moviesTemplate += movieItem
+     }
+  }
+  return `<h1>Movies List:</h1>
+  <ul>
+   ${moviesTemplate}
+  </ul>
+  `
+
+}
 let getMovieCollection = () =>
   {
 
@@ -56,7 +78,8 @@ let service = {
     get: getMovieCollection,
     filter: filterList,
     add: addMovie,
-    delete: deleteMovie
+    delete: deleteMovie,
+    renderMovieList: renderMovieList
 };
 //return service
 return service;
